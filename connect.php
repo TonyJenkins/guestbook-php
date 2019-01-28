@@ -6,7 +6,7 @@
  * Time: 12:07
  */
 
-    $server = "localhost";
+    $server = "mysql";
     $username = "guestbook_user";
     $password = "guestbook_password";
     $database = "guestbook";
