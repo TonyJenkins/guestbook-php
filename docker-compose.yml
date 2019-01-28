@@ -11,8 +11,6 @@ services:
         - MYSQL_DATABASE=guestbook
         - MYSQL_USER=guestbook_user
         - MYSQL_PASSWORD=guestbook_password
-      ports:
-        - "3306:3306"
     php_apache:
       image: webdevops/php-apache:alpine
       container_name: simple-php-guestbook-apache
