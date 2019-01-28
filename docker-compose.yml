@@ -1,0 +1,27 @@
+version: "3.1"
+services:
+    mysql:
+      image: mysql:5.7
+      container_name: simple-php-guestbook-mysql
+      volumes:
+#       - ./docker/opt/mysql_data:/var/lib/mysql -- To be used if persistence is required.
+        - ./guestbook.sql:/docker-entrypoint-initdb.d/guestbook.sql
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=guestbook
+        - MYSQL_USER=guestbook_user
+        - MYSQL_PASSWORD=guestbook_password
+    php_apache:
+      image: webdevops/php-apache:alpine
+      container_name: simple-php-guestbook-apache
+      working_dir: /app
+      depends_on:
+        - mysql
+      links:
+        - mysql:mysql
+      volumes:
+        - .:/app
+      ports:
+        - "8585:80"
+      environment:
+        - WEB_DOCUMENT_ROOT=/app
